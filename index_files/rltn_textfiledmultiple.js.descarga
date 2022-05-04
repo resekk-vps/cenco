@@ -1,0 +1,62 @@
+function rltn_textfield_multiple_update(p_item_name,p_separador){
+   v_obj = $('#'+p_item_name);
+   v_obj.val('');
+   $('input[name^='+p_item_name+'_T]').each(
+	  function(){
+		var input = $(this).val().replace('|','');  
+        if (input !='') 
+          v_obj.val(v_obj.val()+input+p_separador);
+        else
+          v_obj.val(v_obj.val()+p_separador);      
+      }
+    );
+}
+
+function rltn_textfield_multiple_insert(p_item_name){
+  v_obj  = $('input[name='+p_item_name+']');
+  if (v_obj.val().length == v_obj.attr('maxlength')) {
+    var $next = v_obj.next('input');
+    if ($next.length) {
+        $next.focus();
+        $next.select();
+    }
+    else
+        v_obj.blur();
+  }
+}
+
+function ValidaCaracter(string, filtro){//Filtra caracteres
+    var out = '';
+	
+	if (filtro == ''){ //Si filtro se envia vacio, no se valida los caracteres enviados
+		out = string;
+	}
+	else{	
+		//Recorrer el texto y verificar si el caracter se encuentra en la lista de validos 
+		for (var i=0; i<string.length; i++)
+		   if (filtro.indexOf(string.charAt(i)) != -1) 
+				 //Se añaden a la salida los caracteres validos
+			 out += string.charAt(i);
+	}
+    //Retornar valor filtrado
+    return out;
+} 
+
+function BloqueaCaracter(string, filtro){//Filtra caracteres
+    var out = '';
+	
+	if (filtro == ''){ //Si filtro se envia vacio, no se valida los caracteres enviados
+		out = string;
+	}
+	else{	
+		//Recorrer el texto y verificar si el caracter se encuentra en la lista de validos 
+		for (var i=0; i<string.length; i++)
+		   if (filtro.indexOf(string.charAt(i)) != 0) 
+				 //Se añaden a la salida los caracteres validos
+			 out += string.charAt(i);
+	}
+    //Retornar valor filtrado
+    return out;
+} 
+
+
